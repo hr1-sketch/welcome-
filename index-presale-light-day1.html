@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KEVIN · Адаптація · День 1 · Pre Sale Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================= */
+/* KEVIN · ВСТУПНИЙ ЕКРАН · СВІТЛА ВЕРСІЯ                         */
+/* Роль: Pre Sale Manager                                         */
+/* Стиль: Warm Sales Energy + Gamification                        */
+/* ============================================================= */
+/* ЯК КЛОНУВАТИ ПІД ІНШУ РОЛЬ:                                    */
+/*   1. Знайди "PRE SALE" + "MANAGER" — заміни на нове            */
+/*   2. Знайди "Pre Sale менеджер" — заміни                       */
+/*   3. Залий новий index.html на Netlify                         */
+/* ============================================================= */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body {
+  width: 100%; height: 100%; overflow: hidden;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #FFFBF2;
+  color: #1F1A14;
+}
+
+.kevin-root { position: relative; width: 100vw; height: 100vh; background: #FFFBF2; overflow: hidden; }
+
+/* ІНТРО */
+.kevin-intro { position: absolute; inset: 0; transition: opacity 0.6s ease, visibility 0s linear 0.6s; }
+
+/* Теплі градієнти (замість dark glow) */
+.kevin-glow-warm {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse at 85% 15%, rgba(255,211,0,0.22) 0%, transparent 55%),
+    radial-gradient(ellipse at 10% 85%, rgba(255,107,71,0.13) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 50%, rgba(255,235,160,0.08) 0%, transparent 70%);
+}
+
+/* Тонкі лінії — світліші, ледь помітні */
+.kevin-lines { position: absolute; inset: 0; pointer-events: none; }
+.kevin-lines span { position: absolute; left: 0; right: 0; height: 1px; background: rgba(31,26,20,0.06); }
+.kevin-lines span:nth-child(1) { top: 16%; }
+.kevin-lines span:nth-child(2) { top: 33%; opacity: 0.5; }
+.kevin-lines span:nth-child(3) { top: 66%; opacity: 0.5; }
+.kevin-lines span:nth-child(4) { top: 83%; }
+
+/* Декоративні крапки — теплі кольори, м'який рух */
+.kevin-stars { position: absolute; inset: 0; pointer-events: none; }
+.kevin-stars span { position: absolute; width: 5px; height: 5px; border-radius: 50%; opacity: 0.55; animation: kevinStar 9s ease-in-out infinite; }
+.kevin-stars .s1 { top: 18%; left: 10%; background: #FFD300; animation-duration: 7s; }
+.kevin-stars .s2 { top: 14%; left: 25%; background: #FF6B47; animation-duration: 9s; width: 4px; height: 4px; }
+.kevin-stars .s3 { top: 32%; left: 35%; background: #FFD300; width: 7px; height: 7px; animation-duration: 8s; }
+.kevin-stars .s4 { top: 21%; left: 48%; background: #FFB347; animation-duration: 6s; }
+.kevin-stars .s5 { top: 48%; left: 62%; background: #FF6B47; width: 4px; height: 4px; animation-duration: 10s; }
+.kevin-stars .s6 { top: 26%; left: 72%; background: #FFD300; animation-duration: 7.5s; }
+.kevin-stars .s7 { top: 38%; left: 88%; background: #FF6B47; animation-duration: 9s; width: 4px; height: 4px; }
+.kevin-stars .s8 { top: 62%; left: 17%; background: #FFD300; animation-duration: 8s; }
+.kevin-stars .s9 { top: 75%; left: 30%; background: #FF6B47; animation-duration: 7s; width: 4px; height: 4px; }
+.kevin-stars .s10 { top: 80%; left: 55%; background: #FFD300; animation-duration: 9s; width: 6px; height: 6px; }
+.kevin-stars .s11 { top: 68%; left: 76%; background: #FFB347; animation-duration: 8s; }
+.kevin-stars .s12 { top: 78%; left: 90%; background: #FFD300; animation-duration: 7.5s; }
+@keyframes kevinStar {
+  0%, 100% { transform: translateY(0); opacity: 0.4; }
+  50% { transform: translateY(-10px); opacity: 0.85; }
+}
+
+/* Логотип */
+.kevin-logo { position: absolute; top: 6%; right: 5%; width: 100px; opacity: 0; animation: kevinFadeIn 1.5s ease-out 2.8s forwards; }
+.kevin-logo svg { width: 100%; height: auto; display: block; }
+
+/* Контент */
+.kevin-content { position: absolute; left: 7%; top: 50%; transform: translateY(-50%); max-width: 80%; }
+
+/* LEVEL badge — gamified */
+.kevin-badge { display: inline-flex; align-items: center; gap: 12px; margin-bottom: 28px; padding: 8px 16px 8px 12px; background: rgba(255,211,0,0.18); border: 1px solid rgba(255,211,0,0.5); border-radius: 50px; opacity: 0; animation: kevinFadeIn 1s ease-out 0.3s forwards; }
+.kevin-badge-dot { width: 8px; height: 8px; background: #FFD300; border-radius: 50%; box-shadow: 0 0 0 0 rgba(255,211,0,0.7); animation: kevinPulseDot 2s ease-in-out infinite; }
+.kevin-badge-text { font-size: 11px; font-weight: 700; color: #8B6F00; letter-spacing: 3px; }
+
+.kevin-reveal-wrap { overflow: hidden; }
+.kevin-pretitle { font-size: clamp(16px, 1.8vw, 26px); font-weight: 500; color: rgba(31,26,20,0.55); margin-bottom: 10px; letter-spacing: 2px; transform: translateY(100%); animation: kevinLineReveal 1s ease-out 0.8s forwards; }
+
+.kevin-title {
+  font-size: clamp(34px, 6.8vw, 96px); font-weight: 900;
+  color: #1F1A14; line-height: 0.95; letter-spacing: -2.5px;
+  margin: 0 0 32px 0; transform: translateY(100%);
+  animation: kevinLineReveal 1.2s ease-out 1.4s forwards;
+}
+
+/* Marker / highlighter ефект — як жовтим маркером підкреслили */
+.kevin-accent {
+  background: linear-gradient(180deg, transparent 55%, #FFD300 55%, #FFD300 95%, transparent 95%);
+  padding: 0 6px;
+  display: inline-block;
+}
+
+.kevin-meta { display: flex; gap: 48px; flex-wrap: wrap; transform: translateY(100%); animation: kevinLineReveal 1s ease-out 2.4s forwards; }
+.kevin-meta-label { font-size: 10px; color: rgba(31,26,20,0.45); letter-spacing: 2px; margin-bottom: 6px; font-weight: 700; }
+.kevin-meta-value { font-size: 15px; color: #1F1A14; font-weight: 700; }
+
+/* Кнопка ПОЧАТИ НАВЧАННЯ */
+.kevin-btn {
+  background: #1F1A14; color: #FFD300; border: none; padding: 18px 38px; border-radius: 50px;
+  font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 800; letter-spacing: 2.5px;
+  cursor: pointer; display: inline-flex; align-items: center; gap: 14px;
+  transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.2s ease;
+  opacity: 0; user-select: none;
+  margin-top: 12px;
+  animation: kevinFadeIn 1s ease-out 3s forwards, kevinPulseBtn 2.5s ease-in-out 4s infinite;
+}
+.kevin-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(31,26,20,0.25); background: #2B2218; }
+.kevin-btn:active { transform: translateY(0); }
+.kevin-btn-icon { width: 14px; height: 14px; }
+.kevin-btn-arrow { font-size: 20px; font-weight: 800; line-height: 1; margin-left: 2px; }
+
+/* Футер — гейміфікований: XP + Day dots */
+.kevin-footer { position: absolute; bottom: 5%; left: 7%; right: 7%; display: flex; justify-content: space-between; align-items: center; opacity: 0; animation: kevinFadeIn 1s ease-out 3.4s forwards; gap: 24px; flex-wrap: wrap; }
+.kevin-quest-label { font-size: 11px; color: rgba(31,26,20,0.5); letter-spacing: 2.5px; font-weight: 700; }
+
+.kevin-progress { display: flex; align-items: center; gap: 14px; }
+.kevin-day-label { font-size: 11px; color: rgba(31,26,20,0.55); letter-spacing: 2px; font-weight: 700; }
+.kevin-day-dots { display: flex; gap: 8px; align-items: center; }
+.kevin-day-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(31,26,20,0.15); border: 2px solid transparent; transition: all 0.3s ease; }
+.kevin-day-dot.active { background: #FFD300; box-shadow: 0 0 0 4px rgba(255,211,0,0.22); }
+
+/* ПРИВІТАЛЬНИЙ ОВЕРЛЕЙ — теж світлий */
+.kevin-welcome {
+  position: absolute; inset: 0;
+  background: #FFFBF2;
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.7s ease, visibility 0s linear 0.7s;
+  padding: 6vh 7vw;
+  display: flex; flex-direction: column; justify-content: center;
+  overflow-y: auto;
+}
+.kevin-glow-coral {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse at 15% 80%, rgba(255,107,71,0.13) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 20%, rgba(255,211,0,0.15) 0%, transparent 55%);
+}
+.kevin-back {
+  position: absolute; top: 4%; right: 3%;
+  background: #FFFFFF; border: 1px solid rgba(31,26,20,0.15); color: rgba(31,26,20,0.7);
+  padding: 10px 18px; border-radius: 50px;
+  font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 2px;
+  cursor: pointer; transition: all 0.2s ease; z-index: 2; user-select: none;
+  box-shadow: 0 4px 12px rgba(31,26,20,0.04);
+}
+.kevin-back:hover { border-color: rgba(31,26,20,0.35); color: #1F1A14; box-shadow: 0 6px 16px rgba(31,26,20,0.08); }
+.kevin-welcome-inner { max-width: 820px; position: relative; z-index: 1; }
+.kevin-welcome-title { font-size: clamp(24px, 4vw, 44px); font-weight: 900; color: #1F1A14; line-height: 1.1; letter-spacing: -1px; margin: 0 0 20px 0; }
+.kevin-welcome-divider { width: 56px; height: 4px; background: #FFD300; border-radius: 2px; margin-bottom: 28px; }
+.kevin-welcome-text { font-size: clamp(14px, 1.5vw, 18px); color: rgba(31,26,20,0.78); line-height: 1.65; margin: 0 0 16px 0; font-weight: 500; }
+.kevin-highlight { background: linear-gradient(180deg, transparent 60%, #FFD300 60%, #FFD300 92%, transparent 92%); padding: 0 4px; font-weight: 700; color: #1F1A14; }
+
+.kevin-tip {
+  border-left: 3px solid #FF6B47;
+  padding: 6px 0 6px 22px;
+  background: rgba(255,107,71,0.05);
+  border-radius: 0 8px 8px 0;
+  padding-right: 18px;
+  padding-top: 12px; padding-bottom: 12px;
+}
+.kevin-tip-label { font-size: 10px; color: #C8482A; letter-spacing: 2.5px; margin-bottom: 6px; font-weight: 800; }
+.kevin-tip-text { font-size: clamp(13px, 1.4vw, 16px); color: rgba(31,26,20,0.72); line-height: 1.55; margin: 0; font-weight: 500; }
+
+/* CSS-TOGGLE БЕЗ JS */
+.kevin-toggle { position: absolute; opacity: 0; pointer-events: none; }
+.kevin-toggle:checked ~ .kevin-root .kevin-intro { opacity: 0; visibility: hidden; transition: opacity 0.6s ease, visibility 0s linear 0.6s; }
+.kevin-toggle:checked ~ .kevin-root .kevin-welcome { opacity: 1; visibility: visible; transition: opacity 0.7s ease 0.3s, visibility 0s linear; }
+
+@keyframes kevinLineReveal { from { transform: translateY(100%); } to { transform: translateY(0); } }
+@keyframes kevinFadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes kevinPulseBtn {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,211,0,0.5); }
+  50% { box-shadow: 0 0 0 14px rgba(255,211,0,0); }
+}
+@keyframes kevinPulseDot {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,211,0,0.7); }
+  50% { box-shadow: 0 0 0 8px rgba(255,211,0,0); }
+}
+
+/* АДАПТИВ ДЛЯ МАЛИХ ВІКОН */
+@media (max-width: 768px) {
+  .kevin-logo { width: 60px; top: 4%; right: 5%; }
+  .kevin-content { left: 6%; max-width: 88%; }
+  .kevin-footer { font-size: 9px; gap: 16px; }
+  .kevin-meta { gap: 28px; }
+  .kevin-progress { gap: 10px; }
+}
+</style>
+</head>
+<body>
+
+<input type="checkbox" id="kevin-toggle" class="kevin-toggle">
+
+<div class="kevin-root">
+
+<!-- ========== ШАР 1: ІНТРО ========== -->
+<div class="kevin-intro">
+
+<div class="kevin-glow-warm"></div>
+
+<div class="kevin-stars">
+<span class="s1"></span><span class="s2"></span><span class="s3"></span>
+<span class="s4"></span><span class="s5"></span><span class="s6"></span>
+<span class="s7"></span><span class="s8"></span><span class="s9"></span>
+<span class="s10"></span><span class="s11"></span><span class="s12"></span>
+</div>
+
+<div class="kevin-lines">
+<span></span><span></span><span></span><span></span>
+</div>
+
+<!-- Логотип KEVIN -->
+<div class="kevin-logo">
+<svg viewBox="0 0 561 350" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M286.123 54.5387C281.131 50.4673 267.982 49.1438 259.781 54.5387L287.116 20.5001H296.798L286.066 54.5387H286.123Z" fill="#E4B472"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M287.168 20.5008L303.425 0L296.85 20.5008H287.168Z" fill="#FFFFFF"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M319.611 20.5008L303.354 0L309.914 20.5008H319.611Z" fill="#9B827C"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M309.915 20.5008L303.354 0L296.852 20.5008H309.915Z" fill="#CCCCCC"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M320.702 54.5819L309.913 20.5001H296.85L286.103 54.6682C297.54 48.3957 309.208 48.5683 320.702 54.6682V54.5819Z" fill="#F4D592"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M320.66 54.5387C326.544 49.6185 339.363 48.7841 346.887 54.5387L319.552 20.5001H309.856L320.603 54.5387H320.66Z" fill="#FDFAD7"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M286.134 191.748H259.519L259.778 54.5431C268.573 48.3185 277.349 48.3185 286.106 54.5431V191.748H286.134Z" fill="#DE8E2B"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M320.564 192.107L286.122 191.748V54.5431C297.574 48.3185 309.054 48.3185 320.564 54.5431V192.107Z" fill="#F0BD40"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M346.915 191.748H320.3L320.559 54.5431C329.354 48.3185 338.13 48.3185 346.886 54.5431V191.748H346.915Z" fill="#F2D065"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M259.543 180.021L238.467 203.24C235.906 203.298 234.741 201.859 234.971 198.924C234.971 160.685 231.935 147.406 259.788 116.202L259.543 180.064V180.021Z" fill="#888888"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M259.798 116.159L253.094 124.071L252.849 187.401L259.553 179.762L259.798 116.159Z" fill="#666666"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M303.008 82.5349C305.529 82.5349 307.993 83.2824 310.089 84.683C312.186 86.0836 313.819 88.0744 314.784 90.4035C315.749 92.7326 316.001 95.2955 315.509 97.7681C315.018 100.241 313.804 102.512 312.021 104.294C310.238 106.077 307.967 107.291 305.495 107.783C303.022 108.275 300.459 108.022 298.13 107.058C295.801 106.093 293.81 104.459 292.409 102.363C291.009 100.267 290.261 97.8024 290.261 95.2813C290.261 91.9008 291.604 88.6586 293.995 86.2682C296.385 83.8778 299.627 82.5349 303.008 82.5349V82.5349ZM303.008 70.1912C307.97 70.1912 312.821 71.6627 316.947 74.4196C321.073 77.1766 324.289 81.0951 326.188 85.6798C328.087 90.2644 328.584 95.3092 327.616 100.176C326.648 105.043 324.258 109.514 320.749 113.023C317.24 116.532 312.77 118.921 307.903 119.889C303.036 120.858 297.991 120.361 293.406 118.462C288.822 116.563 284.903 113.347 282.146 109.221C279.389 105.095 277.918 100.244 277.918 95.2813C277.916 91.9859 278.563 88.7225 279.824 85.6775C281.084 82.6326 282.932 79.8659 285.262 77.5357C287.592 75.2055 290.359 73.3574 293.404 72.0972C296.449 70.837 299.712 70.1893 303.008 70.1912V70.1912Z" fill="#FFFFFF"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M259.689 191.928H346.973V201.02C346.961 204.262 345.667 207.368 343.373 209.659C341.079 211.951 337.972 213.241 334.73 213.248H271.903C268.661 213.241 265.554 211.951 263.26 209.659C260.966 207.368 259.672 204.262 259.661 201.02V191.928H259.689Z" fill="#3DB4BF"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M303.008 83.5434C305.333 83.5434 307.606 84.2331 309.54 85.5253C311.473 86.8174 312.979 88.654 313.869 90.8025C314.758 92.9511 314.99 95.3152 314.535 97.5956C314.08 99.876 312.959 101.97 311.314 103.614C309.669 105.257 307.573 106.375 305.292 106.827C303.011 107.279 300.648 107.044 298.5 106.152C296.353 105.26 294.518 103.752 293.228 101.817C291.938 99.882 291.251 97.6081 291.254 95.2828C291.254 93.74 291.558 92.2123 292.149 90.787C292.74 89.3618 293.606 88.067 294.698 86.9767C295.789 85.8864 297.085 85.022 298.511 84.4329C299.937 83.8437 301.465 83.5415 303.008 83.5434Z" fill="#76CFE5"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M301.131 88.6394C308.396 84.8557 315.747 95.286 308.511 101.415C309.691 95.238 307.231 90.9796 301.131 88.6394Z" fill="#FFFFFF"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M346.948 180.367L368.038 203.587C370.58 203.587 371.745 202.148 371.534 199.271C371.534 161.046 374.57 147.752 346.703 116.562L346.948 180.424V180.367Z" fill="#888888"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M346.789 116.82L353.493 124.733L353.738 188.063L347.034 180.423L346.789 116.82Z" fill="#666666"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M309.053 136.47L307.024 199.454C306.449 217.438 299.831 218.272 299.256 199.454L297.241 136.671C296.752 121.22 309.513 122.285 309.053 136.413V136.47Z" fill="#888888"/>
+<path d="M0 237.708H30.7009V282.651L68.8397 237.708H105.238L63.3009 285.342L106.662 348.484H69.7892L41.9368 307.339L30.7009 319.841V348.644H0V237.708Z" fill="#1F1A14"/>
+<path d="M131.351 237.708H220.447V263.819H161.735V280.594H214.908V304.807H161.735V322.387H221.238V348.484H131.351V237.708Z" fill="#1F1A14"/>
+<path d="M243.869 237.708H278.21L303.372 307.828L328.534 237.708H362.242L317.298 349.275H288.813L243.869 237.708Z" fill="#1F1A14"/>
+<path d="M389.457 348.484H420.316V237.708H389.457V348.484Z" fill="#1F1A14"/>
+<path d="M456.395 237.708H485.039L530.616 296.261V237.708H561V348.484H534.097L486.78 287.715V348.484H456.395V237.708Z" fill="#1F1A14"/>
+<path d="M284.999 237.968L304.334 282.149L322.317 237.853L284.999 237.968Z" fill="#EFBC3F"/>
+<path d="M295.771 237.91L304.533 257.922L312.676 237.853L295.771 237.91Z" fill="#FFFFFF"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M328.535 237.895L303.373 307.829L278.211 237.895" fill="#EB7C22"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M319.988 237.895L303.055 284.954L286.122 237.895" fill="#F0BD40"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M311.238 237.895L303.052 260.669L294.852 237.895" fill="#FFFFFF"/>
+</svg>
+</div>
+
+<!-- ОСНОВНИЙ КОНТЕНТ -->
+<div class="kevin-content">
+
+<div class="kevin-badge">
+<span class="kevin-badge-dot"></span>
+<span class="kevin-badge-text">LEVEL 01 · ONBOARDING</span>
+</div>
+
+<div class="kevin-reveal-wrap">
+<div class="kevin-pretitle">ТИ — НОВИЙ</div>
+</div>
+
+<div class="kevin-reveal-wrap">
+<h1 class="kevin-title">PRE SALE <span class="kevin-accent">MANAGER</span></h1>
+</div>
+
+<div class="kevin-reveal-wrap" style="margin-bottom: 28px;">
+<div class="kevin-meta">
+<div class="kevin-meta-item">
+<div class="kevin-meta-label">ROLE</div>
+<div class="kevin-meta-value">Pre Sale менеджер</div>
+</div>
+<div class="kevin-meta-item">
+<div class="kevin-meta-label">DURATION</div>
+<div class="kevin-meta-value">3 дні навчання</div>
+</div>
+<div class="kevin-meta-item">
+<div class="kevin-meta-label">REWARD</div>
+<div class="kevin-meta-value">+ Команда KEVIN</div>
+</div>
+</div>
+</div>
+
+<label for="kevin-toggle" class="kevin-btn">
+<svg class="kevin-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M5 3l14 9-14 9V3z" fill="currentColor"/>
+</svg>
+<span>ПОЧАТИ НАВЧАННЯ</span>
+<span class="kevin-btn-arrow">›</span>
+</label>
+
+</div>
+
+<!-- ФУТЕР: гейміфікований -->
+<div class="kevin-footer">
+<span class="kevin-quest-label">НАВЧАННЯ · ONBOARDING 2026</span>
+<div class="kevin-progress">
+<span class="kevin-day-label">DAY 1 / 3</span>
+<div class="kevin-day-dots">
+<span class="kevin-day-dot active"></span>
+<span class="kevin-day-dot"></span>
+<span class="kevin-day-dot"></span>
+</div>
+</div>
+</div>
+
+</div>
+
+<!-- ========== ШАР 2: ПРИВІТАЛЬНИЙ ОВЕРЛЕЙ ========== -->
+<div class="kevin-welcome">
+
+<div class="kevin-glow-coral"></div>
+
+<label for="kevin-toggle" class="kevin-back">← НАЗАД</label>
+
+<div class="kevin-welcome-inner">
+
+<div class="kevin-badge" style="margin-bottom: 24px; animation: none; opacity: 1;">
+<span class="kevin-badge-dot"></span>
+<span class="kevin-badge-text">DAY 01 · СТАРТ НАВЧАННЯ</span>
+</div>
+
+<h2 class="kevin-welcome-title">Привіт! Раді вітати тебе<br/>у першому <span class="kevin-accent">адаптаційному дні</span>!</h2>
+
+<div class="kevin-welcome-divider"></div>
+
+<p class="kevin-welcome-text">
+Хочемо зазначити, що адаптація розрахована на твоє <span class="kevin-highlight">повне включення</span> протягом дня.
+</p>
+
+<p class="kevin-welcome-text" style="margin-bottom: 28px;">
+Став чайник, готуй каву — і вперед! ☕
+</p>
+
+<div class="kevin-tip">
+<div class="kevin-tip-label">ПОРАДА</div>
+<p class="kevin-tip-text">Не забудь взяти нотатник, щоб записувати питання, які зможеш поставити керівнику на зустрічі.</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
